@@ -1,5 +1,5 @@
 // ===========================
-// LUMINQ v3 — Site JavaScript
+// LUMINQ v5 — Site JavaScript
 // ===========================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -77,6 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!data.name || !data.email) {
                 return;
             }
+
+            // Human checkbox validation
+            const humanCheck = document.getElementById('humanCheck');
+            const humanCheckError = document.getElementById('humanCheckError');
+            if (!humanCheck.checked) {
+                humanCheckError.style.display = 'block';
+                humanCheck.focus();
+                return;
+            }
+            humanCheckError.style.display = 'none';
 
             // Show sending state
             const submitBtn = form.querySelector('button[type="submit"]');

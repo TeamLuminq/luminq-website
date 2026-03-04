@@ -1,5 +1,5 @@
 /* ===========================
-   LUMINQ v3 — Brand Stylesheet
+   LUMINQ v5 — Brand Stylesheet
    Light theme on #D7EDF1
    =========================== */
 
@@ -12,6 +12,14 @@
     --color-red: #ff3c4b;
     --gradient-brand: linear-gradient(135deg, #5dcadb 0%, #7331df 50%, #ff3c4b 100%);
     --gradient-brand-horizontal: linear-gradient(90deg, #5dcadb 0%, #7331df 50%, #ff3c4b 100%);
+
+    /* Box Gradients (5 brand gradients) */
+    --gradient-box-1: linear-gradient(135deg, #ff3c4b 0%, #e80098 100%);
+    --gradient-box-2: linear-gradient(135deg, #3aaa05 0%, #0dcd0a 100%);
+    --gradient-box-3: linear-gradient(135deg, #4a53fa 0%, #4ab0fa 100%);
+    --gradient-box-4: linear-gradient(135deg, #ff6205 0%, #fe8800 50%, #feb700 100%);
+    --gradient-box-5: linear-gradient(135deg, #5435f1 0%, #b40ae7 100%);
+    --gradient-box-6: linear-gradient(135deg, #0a8fa3 0%, #34d399 100%);
 
     /* Light Theme Colours */
     --color-bg: #D7EDF1;
@@ -97,6 +105,76 @@ img {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+/* =========================
+   GRADIENT BOX SYSTEM
+   ========================= */
+.gradient-box {
+    border: none !important;
+    color: var(--color-white);
+}
+
+.gradient-box--1 { background: var(--gradient-box-1) !important; }
+.gradient-box--2 { background: var(--gradient-box-2) !important; }
+.gradient-box--3 { background: var(--gradient-box-3) !important; }
+.gradient-box--4 { background: var(--gradient-box-4) !important; }
+.gradient-box--5 { background: var(--gradient-box-5) !important; }
+.gradient-box--6 { background: var(--gradient-box-6) !important; }
+
+/* White text overrides for gradient boxes */
+.gradient-box h3,
+.gradient-box p,
+.gradient-box span,
+.gradient-box .stat-card__source,
+.gradient-box strong,
+.gradient-box .stat-card__number,
+.gradient-box .stat-card__label,
+.gradient-box .service-card__number,
+.gradient-box .ladder-card__stage,
+.gradient-box .ladder-card__desc,
+.gradient-box .ladder-card__details p,
+.gradient-box .ladder-card__details strong {
+    color: var(--color-white) !important;
+    -webkit-text-fill-color: var(--color-white) !important;
+}
+
+/* Override gradient-text inside gradient boxes */
+.gradient-box .stat-card__number {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+}
+
+/* Icons inside gradient boxes — transparent bg, white icon */
+.gradient-box .stat-card__icon,
+.gradient-box .problem-card__icon,
+.gradient-box .service-card__icon {
+    background: transparent;
+    color: var(--color-white);
+}
+
+/* Ladder card outcome tags on gradient boxes */
+.gradient-box .ladder-card__outcomes span {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--color-white) !important;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Value card headings — override gradient text */
+.gradient-box.value-card h3 {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: var(--color-white) !important;
+    color: var(--color-white) !important;
+}
+
+/* Hover adjustments for gradient boxes */
+.gradient-box:hover {
+    border-color: transparent !important;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Buttons --- */
@@ -298,12 +376,16 @@ img {
 }
 
 .hero__title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
     font-weight: 800;
     line-height: 1.08;
     margin-bottom: 24px;
     letter-spacing: -1px;
     color: var(--color-text-heading);
+}
+
+.hero__title-line {
+    white-space: nowrap;
 }
 
 .hero__subtitle {
@@ -322,8 +404,9 @@ img {
 }
 
 .hero__stats {
-    display: flex;
-    gap: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
     padding-top: 40px;
     border-top: 1px solid var(--color-border);
 }
@@ -365,7 +448,7 @@ img {
 
 .section__header {
     text-align: center;
-    max-width: 700px;
+    max-width: 780px;
     margin: 0 auto 64px;
 }
 
@@ -402,7 +485,7 @@ img {
 
 .stats-grid--large {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 24px;
 }
 
@@ -412,7 +495,7 @@ img {
     border-radius: 16px;
     border: 1px solid var(--color-border-light);
     background: var(--color-card);
-    transition: border-color var(--transition), transform var(--transition);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .stat-card--large:hover {
@@ -444,6 +527,14 @@ img {
     line-height: 1.5;
 }
 
+.stat-card__source {
+    font-style: italic;
+    font-size: 0.75rem;
+    opacity: 0.8;
+    display: block;
+    margin-top: 4px;
+}
+
 /* =========================
    PLATFORM STATS
    ========================= */
@@ -463,7 +554,7 @@ img {
     border-radius: 16px;
     border: 1px solid var(--color-border-light);
     background: var(--color-card);
-    transition: border-color var(--transition), transform var(--transition);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .stat-card:hover {
@@ -506,7 +597,7 @@ img {
     border-radius: 16px;
     border: 1px solid var(--color-border-light);
     background: var(--color-card);
-    transition: border-color var(--transition), transform var(--transition);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .problem-card:hover {
@@ -517,6 +608,11 @@ img {
 .problem-card__icon {
     color: var(--color-red);
     margin-bottom: 16px;
+}
+
+/* Icon colour override for gradient problem cards */
+.gradient-box .problem-card__icon {
+    color: var(--color-white);
 }
 
 .problem-card h3 {
@@ -549,7 +645,7 @@ img {
     border-radius: 16px;
     border: 1px solid var(--color-border-light);
     background: var(--color-card);
-    transition: border-color var(--transition), transform var(--transition);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .service-card:hover {
@@ -589,6 +685,42 @@ img {
     font-size: 0.95rem;
     color: var(--color-text-secondary);
     line-height: 1.6;
+}
+
+.service-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-card__list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.service-card__list li:last-child {
+    margin-bottom: 0;
+}
+
+.service-card__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* White list items inside gradient service cards */
+.gradient-box .service-card__list li,
+.gradient-box .service-card__list li::before {
+    color: var(--color-white) !important;
 }
 
 .solution__multiplier {
@@ -729,7 +861,7 @@ img {
     border-radius: 16px;
     border: 1px solid var(--color-border-light);
     background: var(--color-card);
-    transition: transform var(--transition), border-color var(--transition);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
     display: flex;
     flex-direction: column;
 }
@@ -820,7 +952,7 @@ img {
     border-radius: 16px;
     border: 1px solid var(--color-border-light);
     background: var(--color-card);
-    transition: border-color var(--transition), transform var(--transition);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .value-card:hover {
@@ -853,7 +985,7 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .team__photo-wrapper {
@@ -864,8 +996,9 @@ img {
 
 .team__photo {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover;
 }
 
 .team__bios {
@@ -1035,6 +1168,33 @@ img {
     margin-bottom: 0;
 }
 
+/* FAQ lists */
+.faq-item__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+
+.faq-item__list li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+.faq-item__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gradient-brand);
+}
+
 /* =========================
    CONTACT / CTA
    ========================= */
@@ -1100,8 +1260,20 @@ img {
     line-height: 1.6;
 }
 
-.contact__map {
+.contact__map-links {
     margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn--map {
+    font-size: 0.85rem;
+    padding: 10px 20px;
+}
+
+.btn--map svg {
+    flex-shrink: 0;
 }
 
 .contact__form-wrapper {
@@ -1153,6 +1325,41 @@ img {
 .form-group textarea {
     resize: vertical;
     min-height: 80px;
+}
+
+.form-group--checkbox {
+    margin-bottom: 20px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-cyan);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.checkbox-text {
+    line-height: 1.4;
+}
+
+.checkbox-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--color-red);
+    font-weight: 500;
 }
 
 .form-note {
@@ -1375,20 +1582,32 @@ img {
         padding: 40px 0;
     }
 
+    /* FIX: Hero stats mobile layout — stack vertically */
     .hero__stats {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 24px;
     }
 
     .hero__stat {
+        display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         gap: 16px;
+    }
+
+    .hero__title-line {
+        white-space: normal;
     }
 
     .hero__stat-number {
         font-size: 1.5rem;
         min-width: 60px;
+        flex-shrink: 0;
+    }
+
+    .hero__stat-label {
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
 
     .hero__stat-label br {
@@ -1396,7 +1615,7 @@ img {
     }
 
     .stats-grid--large {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     .stats-grid {
@@ -1470,8 +1689,14 @@ img {
         flex-direction: column;
     }
 
+    /* Ensure stat number doesn't squeeze label on very small screens */
+    .hero__stat-number {
+        font-size: 1.3rem;
+        min-width: 50px;
+    }
+
     .stats-grid--large {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     .stats-grid {
